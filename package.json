@@ -1,0 +1,36 @@
+{
+  "name": "yorkproject",
+  "version": "1.0.0",
+  "author": "Danustan Alphonza",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danzilla/yorkProject.git"
+  },
+  "scripts": {
+    "server-install": "cd ./server && npm install",
+    "client-install": "cd ./client && npm install",
+    "install": "npm run server-install & npm run client-install",
+    "server": "cd ./server && npm start",
+    "client": "cd ./client && npm start",
+    "db": "docker-compose up -d pgadmin && docker-compose up postgres_db",
+    "docker-start": "docker-compose up -d pgadmin && docker-compose up postgres_db server client",
+    "docker-clean": "docker-compose rm -f && docker-compose build --no-cache",
+    "prettier-server": "prettier --config .prettierrc './server/app/**/*.js' --write",
+    "prettier-client": "prettier --config .prettierrc './client/app/**/*.jsx' --write",
+    "prety": "npm run prettier-client & npm run prettier-server"
+  },
+  "dependencies": {
+    "create-react-app": "^5.0.1",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.7"
+  },
+  "bugs": {
+    "url": "https://github.com/danzilla/yorkProject/issues"
+  },
+  "homepage": "https://github.com/danzilla/yorkProject#readme",
+  "main": "index.js",
+  "license": "ISC",
+  "description": ""
+}

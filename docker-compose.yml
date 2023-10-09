@@ -1,0 +1,56 @@
+# Docker-compose
+# PostgreSQL + PGAdmin + Node(React) + Node(Express)
+# App Name(Default): blingBlaw
+
+# Volumes
+volumes:
+  database_data:
+    driver: local
+# Services
+services:
+  # PostgreSQL - postgres_db
+  postgres_db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - database_data:/var/lib/postgresql/data
+  # PGAdmin
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT}:80"
+    links:
+      - postgres_db
+  # API - server
+  server:
+    image: node:latest
+    volumes:
+      - ./server:/usr/src/app/blingBlaw/server
+    working_dir: /usr/src/app/blingBlaw/server
+    command: bash -c "npm install && npm run start"
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    links:
+      - postgres_db
+  # UI - client
+  client:
+    image: node:latest
+    volumes:
+      - ./client:/usr/src/app/blingBlaw/client
+    working_dir: /usr/src/app/blingBlaw/client
+    command: bash -c "npm install && npm run start"
+    tty: true
+    stdin_open: true
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    links:
+      - server
