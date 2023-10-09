@@ -5,8 +5,8 @@ import axios from 'axios';
 
 function App(props) {
 
+  // Request API server to get Vechile information
   const [vechicleInfo, setVehicleInfo] = useState();
-
   const viewVehicleInfo = () => {
     axios.post(`http://localhost:5000/api/viewvehicle`)
       .then((data) => {
@@ -20,11 +20,12 @@ function App(props) {
         setVehicleInfo(msg)
       })
   }
-
+  // On start of the page, request to refresh vechil information 
   useEffect(() => {
     viewVehicleInfo()
   }, []);
 
+  // Display component for vechilce information 
   let display;
   if(vechicleInfo){
     display = <h1>hello</h1>
@@ -50,10 +51,6 @@ function App(props) {
   } else {
     display = <h1>Loading...</h1>
   }
-
-
-
-
 
   return (
 

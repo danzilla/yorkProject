@@ -1,19 +1,18 @@
-// import './App.css';
 import { useState } from 'react';
 import axios from 'axios';
 
 function App(props) {
 
+  // User input 
   const [inputs, setInputs] = useState({});
-
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}))
   }
 
+  // Form Submission 
   const [message, setMessage] = useState("")
-
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post(`http://localhost:5000/api/login`, {  userInfo: inputs } )

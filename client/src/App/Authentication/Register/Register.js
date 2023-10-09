@@ -4,17 +4,16 @@ import axios from 'axios';
 
 function App(props) {
 
-
+  // User inputs for submission
   const [inputs, setInputs] = useState({});
-
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}))
   }
 
+  // Form submission
   const [message, setMessage] = useState("")
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if(inputs.name && inputs.email && inputs.password){

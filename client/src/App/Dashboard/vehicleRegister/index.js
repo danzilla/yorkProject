@@ -5,6 +5,7 @@ import axios from 'axios';
 
 function App(props) {
 
+  // List of Question for Circl Check Up
   let questionList = [
     {isSelected: '', question: 'Foot Brake - holds, stops vehicle smoothly'},
     {isSelected: '', question: 'Clutch and Gearshift - shifts smoothly without jumping or jerking'},
@@ -30,6 +31,7 @@ function App(props) {
 
   const [questions, setQuestions] = useState(questionList);
 
+  // Componet to display the questions
   const listOfQuestion = questions.map((question, i) =>
     <div className="form-check" key={i}>
       <input onChange={() => setQuestions(questionsP => {
@@ -41,7 +43,8 @@ function App(props) {
       <label className="form-check-label" htmlFor="flexCheckDefault"> {question.question} </label>
     </div>
     );
-
+      
+    // User information for submission 
     const [userName, setUserName] = useState("Empty")
     const [userEmail, setUserEmail] = useState("Empty")
     const [userID, setUserID] = useState("Empty")
@@ -56,7 +59,7 @@ function App(props) {
       }
     }, []);
 
-
+  // Action to change and store user information
   const [inputs, setInputs] = useState({});
   const handleChange = (event) => {
     const name = event.target.name;
@@ -65,8 +68,8 @@ function App(props) {
   }
 
 
-  const [message, setMessage] = useState("")
-
+    const [message, setMessage] = useState("")
+    // Form Submission 
     const handleSubmit = (event) => {
       // console.log("HERROR");
       // console.log(JSON.stringify(questions));

@@ -128,7 +128,7 @@ router.post('/Addvehicle', function(req, res) {
 
   });
 
-    // Add vehicle status
+    // view vehicle status
     router.post('/viewvehicle', function(req, res) {
 
         let User_Response = Object.create(RESPONSE);
